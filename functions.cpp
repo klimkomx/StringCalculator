@@ -35,6 +35,7 @@ double sin(double a) {
 double cos(double a) {
     double div = 1.0, mult = 1.0, ans = 0.0, sans = -1.0, sign = 1.0, cnt = 1.0;
     for (; abs(sans - ans) > EPS; sans = ans, ans += sign * mult/div, div *= cnt * (cnt + 1), mult *= a * a, sign *= -1.0, cnt += 2.0);
+    if (abs(ans) < EPS) return 0;
     return ans;
 }
 
