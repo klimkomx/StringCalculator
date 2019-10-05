@@ -35,7 +35,7 @@ public:
 };
 
 template <typename T, typename D> List<T, D>::List() {
-    element = D(0);
+    element = D(10000);
 }
 
 template <typename T, typename D> List<T, D>::List(T newKey, D newElement) {
@@ -61,4 +61,5 @@ template <typename T> List<T, std::string>::List(T newKey, std::string& newEleme
     key = newKey;
 }
 
+//template<typename D>
 #endif //MAPLIST_H

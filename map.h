@@ -8,6 +8,7 @@
 #include <string>
 #include "mapList.h"
 
+namespace me {
 //Constants
 const int UNORDERED_MAP_LIST_SIZE = 100000, MULTIPLIER = 257;
 
@@ -17,23 +18,13 @@ int hash(T &key) {
     return ((int)key) % UNORDERED_MAP_LIST_SIZE;
 }
 
-int hash(std::string& key) {
-    int ans = 0;
-    for (int i = 0; i < key.size(); i++) {
-        ans = ((ans + key[i] - (char)0) * MULTIPLIER) % UNORDERED_MAP_LIST_SIZE;
-    }
-    return ans;
-}
-
-
-
 //map
 template <typename T, typename D> class map {
 private:
     List<T, D> *table[UNORDERED_MAP_LIST_SIZE];
     D& searchByKey(int, T&);
 public:
-    D& operator[](T&);
+    D& operator[](T);
 };
 
 template <typename T, typename D> D& map<T, D>::searchByKey(int index, T& sKey) {
@@ -53,8 +44,8 @@ template <typename T, typename D> D& map<T, D>::searchByKey(int index, T& sKey) 
     }
 }
 
-template <typename T, typename D> D& map<T, D>::operator[](T& key) {
+template <typename T, typename D> D& map<T, D>::operator[](T key) {
     return searchByKey(hash(key), key);
 }
-
+}
 #endif //MAP_H

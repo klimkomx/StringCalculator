@@ -12,23 +12,28 @@ class stack {
 private:
     StackElement<T> *head;
 public:
-    stack(){}
-    inline bool empty() {
-        return this->head != nullptr;
+    stack(){head = nullptr;}
+    bool empty() {
+        return head == nullptr;
     }
-    inline void push(T& newElement) {
+    void push(const T& newElement) {
+
         StackElement<T> *New = new StackElement<T>(newElement);
-        New->prev = head;
-        head = New;
+        if (head == nullptr)
+            head = New;
+        else {
+            New->prev = head;
+            head = New;
+        }
         return;
     }
-    inline void pop() {
+    void pop() {
         if (head == nullptr) return;
         StackElement<T>* Tmp = head;
         head = head->prev;
         delete Tmp;
     }
-    inline T top() {
+    T top() {
         if (head == nullptr) {
             throw ("Error : stack is empty, but you are trying to get a value of first element from it.");
         }

@@ -6,7 +6,7 @@
 #define QUEUE_H
 
 #include "queueElement.h"
-
+#include<QDebug>
 template <typename T>
 class queue {
 private:
@@ -15,10 +15,10 @@ public:
     queue(){
         head = nullptr, tail = nullptr;
     }
-    inline bool empty() {
-        return head != nullptr;
+    bool empty()const {
+        return (head == nullptr);
     }
-    inline void push(T& newElement) {
+    inline void push(const T& newElement) {
         QueueElement<T> *New = new QueueElement<T>(newElement);
         if (head != nullptr) tail->next = New;
         else head = New;
@@ -31,8 +31,20 @@ public:
         if (head == nullptr) tail = nullptr;
         delete Tmp;
     }
-    inline T top() {
+    inline T front() {
         return head->elem;
+    }
+    void clear() {
+        QueueElement<T> *tmp = head, *tmp2;
+        while (tmp != nullptr) {
+            qDebug() << "kek";
+            tmp2 = tmp -> next;
+            qDebug() << "go";
+            delete tmp;
+            qDebug() << "gog";
+            tmp = tmp2;
+        }
+        return;
     }
 };
 
